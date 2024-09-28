@@ -1,4 +1,4 @@
-package com.example.profile_api.model;
+package com.example.profile_api.controller.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,12 +13,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // Cột tự động tăng duy nhất
     private int userid;
-
     private String username;
     private String password;
     private String email;
     private String address;
-    private int roleid;
+    private Integer roleid;
 
     // Getters và Setters
 
@@ -63,11 +62,11 @@ public class User {
         this.userid = userid;
     }
 
-    public int getRoleid() {
+    public Integer getRoleid() {
         return roleid;
     }
 
-    public void setRoleid(int roleid) {
+    public void setRoleid(Integer roleid) {
         this.roleid = roleid;
     }
 
