@@ -72,8 +72,7 @@ h6 {
 .top-header {
     display: table;
     position: relative;
-    background-image: url(../img/top-header.jpg);
-    background-size: cover;
+    background-image: url(../img/fish3.jpg);
     padding: 50px 0;
     color: #fff;
     width: 100%;
@@ -105,6 +104,7 @@ h6 {
 .top-header .brand {
     margin-bottom: 75px;
     display: inline-block;
+    width: 50%;
 }
 
 .top-header .brand:hover {
@@ -117,18 +117,6 @@ h6 {
     color: #A52A2A;
     letter-spacing: 10px;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-}
-
-@media (max-width: 767.98px) {
-    .top-header h1 {
-        font-size: 70px;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .top-header h1 {
-        font-size: 50px;
-    }
 }
 
 .top-header h2 {
@@ -157,77 +145,6 @@ h6 {
     box-shadow: none;
 }
 
-@media (max-width: 61.9em) {
-    .top-header {
-        padding: 75px 0;
-    }
-
-    .top-header .brand {
-        margin-bottom: 35px;
-    }
-}
-
-/* ================================================= */
-/* -------------- Banner Header CSS ---------------- */
-/* ================================================= */
-
-.banner-header {
-    display: table;
-    position: relative;
-    background-image: url(../img/banner-bg.jpg);
-    background-size: cover;
-    padding: 100px 0;
-    color: #fff;
-    width: 100%;
-}
-
-.banner-header:after {
-    content: '';
-    z-index: 0;
-    position: absolute;
-    background: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-}
-
-.banner-header .container {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-}
-
-.banner-header .brand {
-    margin-bottom: 75px;
-    display: inline-block;
-}
-
-.banner-header .brand:hover {
-    opacity: .75;
-}
-
-.banner-header h1 {
-    font-size: 90px;
-    font-weight: 900;
-    color: #A52A2A;
-    letter-spacing: 10px;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-}
-
-
-.banner-header h2 {
-    font-size: 30px;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 5px;
-    margin-bottom: 50px;
-}
-
-
 /* ================================================= */
 /* ------------------ Header CSS ------------------- */
 /* ================================================= */
@@ -241,13 +158,6 @@ h6 {
     border-bottom: 1px solid #540000;
 }
 
-@media (max-width: 767.98px) {
-
-    #header,
-    #header-sticky-wrapper {
-        display: none;
-    }
-}
 
 #nav-menu-container {
     display: inline-block;
@@ -292,22 +202,7 @@ h6 {
     min-width: 180px;
 }
 
-.sf-arrows .sf-with-ul {
-    padding-right: 30px;
-}
 
-.sf-arrows .sf-with-ul:after {
-    content: "\f107";
-    position: absolute;
-    right: 15px;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-}
-
-.sf-arrows ul .sf-with-ul:after {
-    content: "\f105";
-}
 
 .nav-menu a {
     padding: 22px 15px 21px 15px;
@@ -367,93 +262,36 @@ h6 {
     width: 30%;
 }
 
-
-
-
-#mobile-nav {
-    position: fixed;
-    top: 0;
-    padding-top: 18px;
-    bottom: 0;
-    z-index: 998;
-    background: rgba(0, 0, 0, 0.9);
-    left: -260px;
-    width: 260px;
-    overflow-y: auto;
-    -webkit-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-}
-
-#mobile-nav ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-#mobile-nav ul li {
+.dropdown {
     position: relative;
+    display: inline-block;
 }
 
-#mobile-nav ul li a {
-    color: #fff;
-    font-size: 16px;
-    overflow: hidden;
-    padding: 10px 22px 10px 15px;
-    position: relative;
-    text-decoration: none;
-    width: 100%;
-    display: block;
-    outline: none;
-}
-
-#mobile-nav ul li a:hover {
-    color: #fff;
-}
-
-#mobile-nav ul li li {
-    padding-left: 30px;
-}
-
-#mobile-nav ul .menu-has-children i {
-    position: absolute;
-    right: 0;
-    z-index: 99;
-    padding: 15px;
-    cursor: pointer;
-    color: #fff;
-}
-
-#mobile-nav ul .menu-has-children i.fa-chevron-up {
-    color: #A52A2A;
-}
-
-#mobile-nav ul .menu-item-active {
-    color: #A52A2A;
-}
-
-#mobile-body-overly {
-    width: 100%;
-    height: 100%;
-    z-index: 997;
-    top: 0;
-    left: 0;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.6);
+.dropdown-content {
     display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-body.mobile-nav-active {
-    overflow: hidden;
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-body.mobile-nav-active #mobile-nav {
-    left: 0;
+.dropbtn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
-body.mobile-nav-active #mobile-nav-toggle {
-    color: #fff;
-}
+
+
+
 
 /* ================================================= */
 /* ---------------- Section Header ----------------- */

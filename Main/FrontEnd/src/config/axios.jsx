@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_SEVER_URL,
-})
+});
 
 instance.interceptors.request.use(function (config) {
   return config;
