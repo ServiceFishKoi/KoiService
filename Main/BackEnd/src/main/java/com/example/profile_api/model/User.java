@@ -1,27 +1,32 @@
-package com.example.profile_api.controller.model;
+package com.example.profile_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // Cột tự động tăng duy nhất
-    private int userid;
+    @Column(name="userID")
+    private Integer userID;
+    @Column(name="username")
     private String username;
+    @Column(name="password")
     private String password;
+    @Column(name="email")
     private String email;
+    @Column(name="address")
     private String address;
-    private Integer roleid;
 
-    // Getters và Setters
-
-
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "roleID", nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Role role;
 
     public String getUsername() {
         return username;
@@ -54,21 +59,20 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-    public int getUserid() {
-        return userid;
+
+    public Integer getUserID() {
+        return userID;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
-    public Integer getRoleid() {
-        return roleid;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
-
 }

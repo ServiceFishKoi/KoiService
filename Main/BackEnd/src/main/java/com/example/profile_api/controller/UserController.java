@@ -1,30 +1,39 @@
 package com.example.profile_api.controller;
 
 import com.example.profile_api.config.JwtGeneratorInterface;
-import com.example.profile_api.controller.model.User;
-import com.example.profile_api.service.IUserService;
+import com.example.profile_api.model.User;
 import com.example.profile_api.service.UserService;
+import com.example.profile_api.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     private JwtGeneratorInterface jwtGenerator;
-    private IUserService userService;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserService userService, JwtGeneratorInterface jwtGenerator){
+    public UserController(UserServiceImpl userService, JwtGeneratorInterface jwtGenerator){
         this.userService=userService;
         this.jwtGenerator=jwtGenerator;
     }
-    // Xem hồ sơ
+
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAllTutorials(@RequestParam(required = false) String title) {
+        List<User> users = userService.getALlUser();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> getUserProfile(@PathVariable int  id) {
         Optional<User> user = userService.getUserById(id);
@@ -35,7 +44,6 @@ public class UserController {
         }
     }
 
-    // Cập nhật hồ sơ
     @PutMapping("/update/{id}")
     public ResponseEntity<User> updateUserProfile(@PathVariable int id, @RequestBody User userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
@@ -45,6 +53,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody User user) throws Exception {
         try {

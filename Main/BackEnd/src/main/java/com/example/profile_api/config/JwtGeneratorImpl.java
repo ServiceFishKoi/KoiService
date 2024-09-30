@@ -1,6 +1,6 @@
 package com.example.profile_api.config;
 
-import com.example.profile_api.controller.model.User;
+import com.example.profile_api.model.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
