@@ -43,12 +43,8 @@ public class UserServiceImpl implements UserService {
 
     public User registerUser(User user) {
         List<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser == null) {
-            try {
-                throw new Exception("Email đã được đăng ký");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        if (!existingUser.isEmpty()) {
+            throw new RuntimeException("Email đã được đăng ký");
         }
 
 

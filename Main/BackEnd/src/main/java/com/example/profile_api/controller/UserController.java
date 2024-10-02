@@ -1,6 +1,7 @@
 package com.example.profile_api.controller;
 
 import com.example.profile_api.config.JwtGeneratorInterface;
+import com.example.profile_api.dao.LoginToken;
 import com.example.profile_api.model.User;
 import com.example.profile_api.service.UserService;
 import com.example.profile_api.service.UserServiceImpl;
@@ -58,14 +59,18 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestBody User user) throws Exception {
         try {
             if(user.getEmail() == null || user.getPassword() == null) {
-                throw new Exception("UserName or Password is Empty");
+                throw new Exception("Email or Password is Empty");
             }
             User userData = userService.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
+
             if(userData == null){
-                throw new Exception("UserName or Password is Invalid");
+                throw new Exception("Email or Password is Invalid");
             }
+            userData.setPassword(null);
+
             Map<String,String> token = jwtGenerator.generateToken(user);
-            return new ResponseEntity<>(token, HttpStatus.OK);
+            LoginToken loginToken = new LoginToken(token.get("token"),userData);
+            return new ResponseEntity<>(loginToken, HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);

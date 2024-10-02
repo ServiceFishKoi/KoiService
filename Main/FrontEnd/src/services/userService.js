@@ -12,9 +12,9 @@ export const CreateUser = async (userData) => {
 export const LoginUser = async (userData) => {
   try {
     const result = await axios({
-      url: "/login",
+      url: "/users/login",
       method: "POST",
-      data: userData, 
+      data: userData,
     });
     return result;
   } catch (error) {
