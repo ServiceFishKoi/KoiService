@@ -23,7 +23,7 @@ export const LoginUser = async (userData) => {
     const result = await axios({
       url: "/users/login",
       method: "POST",
-      data: userData, 
+      data: userData,
     });
     console.log("API Response from CreateUser:", result); 
 
