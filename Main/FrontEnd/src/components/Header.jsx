@@ -1,16 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../stores/slices/authSlice'; // Make sure the path is correct
+import { logout } from '../stores/slices/authSlice'; 
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
     const dispatch = useDispatch();
-    const { token, username } = useSelector((state) => state.auth); // Lấy token và username từ Redux
+    const { token, username } = useSelector((state) => state.auth); 
     const navigate = useNavigate();
 
     const handleLogout = () => {
         dispatch(logout());
         navigate("/")
-        // Redirect to login page or do something after logout
     };
 
     return (
@@ -40,7 +39,7 @@ export default function Header() {
                                 <li className="dropdown">
                                     <a href="#" className="dropbtn">{username}</a>
                                     <div className="dropdown-content">
-                                        <a href="/profile">View Profile</a>
+                                        <a href="/ViewProfilePage">View Profile</a>
                                         <a href="#" onClick={handleLogout}>Logout</a>
                                     </div>
                                 </li>

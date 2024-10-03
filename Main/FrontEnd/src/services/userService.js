@@ -1,24 +1,35 @@
 import axios from "../config/axios";
 
 export const CreateUser = async (userData) => {
-  const res = axios({
-    url: "/auth/register",
-    method: "POST",
-    userData,
-  });
-  return res;
+  try {
+    const res = await axios({
+      url: "/auth/register",
+      method: "POST",
+      data: userData,
+    });
+    console.log('API response:', res);
+    if (res.status !== 200) {
+      throw new Error(res.data.message);
+    }
+    return res.data;
+  } catch (error) {
+    console.error("Fail to register");
+    throw new Error(error.message);
+  }
 };
 
 export const LoginUser = async (userData) => {
   try {
     const result = await axios({
-      url: "/login",
+      url: "/users/login",
       method: "POST",
       data: userData, 
     });
-    return result;
+    console.log("API Response from CreateUser:", result); 
+
+    return result.data;
   } catch (error) {
-    throw new Error(error.response?.data?.error || error.message || "An unexpected error occurred.");
+    throw new Error( error.message);
   }
 };
 

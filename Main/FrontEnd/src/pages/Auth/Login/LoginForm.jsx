@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"; // Import useDispatch
-import { login } from "../../../stores/slices/authSlice"; // Import action login
+import { useDispatch } from "react-redux"; 
+import { login } from "../../../stores/slices/authSlice"; 
 
 export default function LoginForm() {
   const {
@@ -11,15 +11,13 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Khởi tạo useDispatch
+  const dispatch = useDispatch(); 
 
   const onLoginSubmit = async (data) => {
     try {
-      const response = await dispatch(login(data)); // Dispatch login action
-      console.log("Response:", response);
-      if (response.payload && response.payload.token) {
-        const token = response.payload.token; // Lấy token từ response
-        localStorage.setItem("token", token); // Lưu token vào localStorage
+      const response = await dispatch(login(data));
+      console.log("Response Payload:", response.payload); 
+      if (response.payload && response.payload.accessToken) {
         toast.success("Login successful!");
         navigate("/");
       } else {
@@ -27,6 +25,7 @@ export default function LoginForm() {
       }
     } catch (error) {
       toast.error("Login failed! Please check your Username and Password.");
+      console.error("Login error:", error); 
     }
   };
 

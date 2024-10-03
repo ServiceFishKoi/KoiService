@@ -4,8 +4,13 @@ import SignUpForm from "../SignUp/SignUpForm";
 
 export default function Login() {
   const [isLoginForm, setIsLoginForm] = useState(true);
+
   const toggleForm = () => setIsLoginForm(!isLoginForm);
 
+  const handleRegisterSuccess = () => {
+    setIsLoginForm(true); 
+  };
+  
   return (
     <div id="login">
       <div className="container">
@@ -22,7 +27,9 @@ export default function Login() {
         </div>
 
         <div className="form-container">
-          {isLoginForm ? <LoginForm /> : <SignUpForm />}
+          {isLoginForm 
+            ? <LoginForm /> 
+            : <SignUpForm onSuccess={handleRegisterSuccess} />} 
         </div>
       </div>
     </div>

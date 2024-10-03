@@ -2,39 +2,36 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { register as registerUser } from "../../../stores/slices/authSlice";
-import { useNavigate } from "react-router-dom";
 
-export default function SignUpForm() {
+export default function SignUpForm({ onSuccess }) { 
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onRegisterSubmit = async (data) => {
-    console.log("Register Data:", data);
     try {
       const response = await dispatch(registerUser({
-        name: data.name,
+        username: data.username,
         address: data.address,
         email: data.email,
         password: data.password,
       }));
-
+      console.log('Redux registration response:', response);
       if (response.error) {
-        throw new Error(response.error.message);
+        toast.error('Email has already registered'); 
+      } else {
+        toast.success("Registration successful!");
+        onSuccess(); // chuyển sang login khi success
       }
-      console.log("Registration Response:", response);
-      navigate("/login"); 
     } catch (error) {
-      console.error("Registration error:", error.message);
-      toast.error("Registration failed! Please check your input and try again.");
+      toast.error(error.message || "An error occurred");
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit(onRegisterSubmit)} className="form">
       <div className="form-group">
@@ -42,9 +39,9 @@ export default function SignUpForm() {
           type="text"
           className="form-control"
           placeholder="Your Name"
-          {...register("name", { required: "Name is required" })}
+          {...register("username", { required: "Name is required" })}  
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.username && <p>{errors.username.message}</p>}  
       </div>
       <div className="form-group">
         <input

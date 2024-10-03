@@ -1,37 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { LoginUser, CreateUser } from "../../services/userService"; 
+import { LoginUser, CreateUser } from "../../services/userService";
 
 export const login = createAsyncThunk('auth/login', async (userData) => {
   const response = await LoginUser(userData);
-  return response; // Return the API response for login
+  return response; 
 });
 
 export const register = createAsyncThunk('auth/register', async (userData) => {
   const response = await CreateUser(userData);
-  console.log("Data sent to API:", userData);
-  console.log("API Response:", response);
-
-  if (!response || response.status !== 200) {
-    throw new Error('Failed to register.'); // Ném lỗi nếu phản hồi không thành công
-  }
-
-  return response; // Trả về phản hồi từ API nếu thành công
+  return response; 
 });
-
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
     token: localStorage.getItem("token") || null,
-    username: null,
+    username: localStorage.getItem("username") || null, 
     isLoading: false,
     error: null,
   },
   reducers: {
     logout: (state) => {
       state.token = null;
-      state.username = null; // Clear username on logout
+      state.username = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("username"); 
     },
   },
   extraReducers: (builder) => {
@@ -41,9 +34,12 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
+        console.log('Login successful:', action.payload); 
         state.isLoading = false;
-        state.token = action.payload.token; // Store token from login response
-        state.username = action.payload.username; // Store username from login response
+        state.token = action.payload.accessToken; 
+        state.username = action.payload.userInfo.username; 
+        localStorage.setItem("token", action.payload.accessToken);
+        localStorage.setItem("username", action.payload.userInfo.username); 
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -53,9 +49,9 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state) => {
         state.isLoading = false;
-        state.username = action.payload.username; // Optionally store username from registration
+        state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
@@ -65,5 +61,4 @@ const authSlice = createSlice({
 });
 
 export const { logout } = authSlice.actions;
-
 export default authSlice.reducer;
