@@ -1,9 +1,16 @@
 package com.example.profile_api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Role")
 public class Role {
 
@@ -14,27 +21,5 @@ public class Role {
     @Column(name="name")
     private String name;
 
-    public Integer getRoleID() {
-        return roleID;
-    }
 
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Role(Integer roleID, String name) {
-        this.roleID = roleID;
-        this.name = name;
-    }
-
-    public Role() {
-    }
 }

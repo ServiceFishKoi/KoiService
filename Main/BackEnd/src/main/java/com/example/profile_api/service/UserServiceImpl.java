@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
         Role userRole = null;
         try {
-            userRole = roleRepository.findByName("USER")
+            userRole = roleRepository.findByName("Customer")
                     .orElseThrow(() -> new Exception("Không tìm thấy vai trò người dùng"));
         } catch (Exception e) {
             throw new RuntimeException(e);

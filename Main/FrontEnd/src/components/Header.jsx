@@ -37,12 +37,12 @@ export default function Header() {
                             <li><a href="/Contact">Contact</a></li>
                             {token ? (
                                 <li className="dropdown">
-                                    <a href="#" className="dropbtn">{username}</a>
-                                    <div className="dropdown-content">
-                                        <a href="/ViewProfilePage">View Profile</a>
-                                        <a href="#" onClick={handleLogout}>Logout</a>
-                                    </div>
-                                </li>
+                                <a href="#" className="dropbtn">{username}</a>
+                                <div className="dropdown-content">
+                                    <a href={`/User/${token}`}>View Profile</a> 
+                                    <a href="#" onClick={handleLogout}>Logout</a>
+                                </div>
+                            </li>
                             ) : (
                                 <li><a href="/Login">Login</a></li>
                             )}

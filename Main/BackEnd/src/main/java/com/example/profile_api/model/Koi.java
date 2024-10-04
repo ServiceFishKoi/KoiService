@@ -1,11 +1,19 @@
 package com.example.profile_api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "Koi")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Koi {
 
     @Id
@@ -29,62 +37,5 @@ public class Koi {
     @OneToMany(mappedBy = "koi", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    // Constructors, Getters, and Setters
-    public Koi() {}
-
-    public Koi(Integer koiID, String name, String species, String color, Double weight) {
-        this.koiID = koiID;
-        this.name = name;
-        this.species = species;
-        this.color = color;
-        this.weight = weight;
-    }
-
-    public Integer getKoiID() {
-        return koiID;
-    }
-
-    public void setKoiID(Integer koiID) {
-        this.koiID = koiID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-    public List<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
 
 }

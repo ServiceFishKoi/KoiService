@@ -23,7 +23,7 @@ export const LoginUser = async (userData) => {
     const result = await axios({
       url: "/users/login",
       method: "POST",
-      data: userData,
+      data: userData, 
     });
     console.log("API Response from CreateUser:", result); 
 
@@ -42,14 +42,20 @@ export function GetAllUser() {
   return { userData: data, isLoading, isError: error, mutate };
 }
 
-export function GetUserById(id) {
-  const { userData } = axios({
-    url: `/${id}`,
-    method: "GET",
-    id,
-  });
-  return { userData };
+export async function GetUserById(id) {
+  try {
+    const response = await axios({
+      url: `/users/${id}`,
+      method: "GET",
+    });
+
+    return { userData: response.data };
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    throw new Error(error.message || "An error occurred while fetching user.");
+  }
 }
+
 
 export const DeleteUser = async (id) => {
   try {

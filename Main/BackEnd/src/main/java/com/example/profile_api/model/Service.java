@@ -2,9 +2,17 @@ package com.example.profile_api.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Service")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Service {
 
     @Id
@@ -27,63 +35,5 @@ public class Service {
     @Column(name="duration")
     private Integer duration;
 
-    // Constructors, Getters, and Setters
-    public Service() {}
 
-    public Service(Integer serviceID, String name, String description, Double basePrice, String serviceType, Integer duration) {
-        this.serviceID = serviceID;
-        this.name = name;
-        this.description = description;
-        this.basePrice = basePrice;
-        this.serviceType = serviceType;
-        this.duration = duration;
-    }
-
-    public Integer getServiceID() {
-        return serviceID;
-    }
-
-    public void setServiceID(Integer serviceID) {
-        this.serviceID = serviceID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(Double basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
 }

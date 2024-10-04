@@ -1,11 +1,20 @@
 package com.example.profile_api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Payment")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Payment {
 
     @Id
@@ -27,67 +36,9 @@ public class Payment {
     private String status;
 
     // Quan hệ với bảng Booking
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "bookingID", nullable = false)
-    private Booking booking;
+    @OneToMany(fetch = FetchType.LAZY)
 
-    // Constructors, Getters, and Setters
-    public Payment() {}
+    private List<Booking> booking;
 
-    public Payment(Integer paymentID, Double totalAmount, String paymentMethod, Date paymentDate, String status, Booking booking) {
-        this.paymentID = paymentID;
-        this.totalAmount = totalAmount;
-        this.paymentMethod = paymentMethod;
-        this.paymentDate = paymentDate;
-        this.status = status;
-        this.booking = booking;
-    }
 
-    public Integer getPaymentID() {
-        return paymentID;
-    }
-
-    public void setPaymentID(Integer paymentID) {
-        this.paymentID = paymentID;
-    }
-
-    public Double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
 }
