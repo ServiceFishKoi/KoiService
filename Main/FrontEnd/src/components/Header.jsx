@@ -1,32 +1,25 @@
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Carousel } from 'react-bootstrap';
 import { logout } from '../stores/slices/authSlice'; 
-import { useNavigate } from "react-router-dom";
+import "./Header.css";
 
 export default function Header() {
     const dispatch = useDispatch();
-    const { token, username } = useSelector((state) => state.auth); 
-    const navigate = useNavigate();
+    const { username } = useSelector((state) => state.auth); 
+
+    const carousels = [
+        { img: '/Images/fish.jpeg', script: 'ảnh 1' },
+        { img: '/Images/fish2.jpeg', script: 'ảnh 2' },
+        { img: '/Images/fish3.jpeg', script: 'ảnh 3' },
+    ];
 
     const handleLogout = () => {
-        dispatch(logout());
-        navigate("/")
+        dispatch(logout()); 
     };
 
     return (
         <>
-            <section className="top-header">
-                <div className="container text-center">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h1><a href="/">Koi Fish Service</a></h1>
-                            <a className="brand" href="/" title="Home">
-                                <img alt="Logo" src="https://tse2.mm.bing.net/th?id=OIG1.mc81L5lzI0R_xZBH6vbw&pid=ImgGn" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <header id="header">
                 <div className="container">
                     <nav id="nav-menu-container">
@@ -35,14 +28,16 @@ export default function Header() {
                             <li><a href="about.html">About</a></li>
                             <li><a href="/Service">Services</a></li>
                             <li><a href="/Contact">Contact</a></li>
-                            {token ? (
+                            {username ? ( 
                                 <li className="dropdown">
-                                <a href="#" className="dropbtn">{username}</a>
-                                <div className="dropdown-content">
-                                    <a href={`/User/${token}`}>View Profile</a> 
-                                    <a href="#" onClick={handleLogout}>Logout</a>
-                                </div>
-                            </li>
+                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                                        {username} <span className="caret"></span>
+                                    </a>
+                                    <ul className="dropdown-menu">
+                                        <li><a href="/User/:id">Profile</a></li>
+                                        <li><a href="#" onClick={handleLogout}>Logout</a></li>
+                                    </ul>
+                                </li>
                             ) : (
                                 <li><a href="/Login">Login</a></li>
                             )}
@@ -50,6 +45,17 @@ export default function Header() {
                     </nav>
                 </div>
             </header>
+
+            <Carousel>
+                {carousels.map((carousel, index) => (
+                    <Carousel.Item key={index}>
+                        <img className="d-block w-100 carousel-img" src={carousel.img} alt={carousel.script} />
+                        <Carousel.Caption>
+                            <h3>{carousel.script}</h3>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                ))}
+            </Carousel>
         </>
     );
 }

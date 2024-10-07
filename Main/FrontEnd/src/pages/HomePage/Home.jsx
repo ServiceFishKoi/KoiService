@@ -1,18 +1,20 @@
-import Service from "./components/Service";
+import { Container, Row, Col, Image } from 'react-bootstrap';
+import "./Home.css";
+import Service from '../ServicePage/Service';
 
 export default function Home() {
   return (
     <>
       <div id="about">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-5 col-md-6">
+        <Container>
+          <Row>
+            <Col lg={5} md={6}>
               <div className="about-col-left">
-                <img className="img-fluid" src="img/about-us.jpg" />
+                <Image className="img-fluid" src="Images/about-us.jpg" rounded />
               </div>
-            </div>
+            </Col>
 
-            <div className="col-lg-7 col-md-6">
+            <Col lg={7} md={6}>
               <div className="about-col-right">
                 <header className="section-header">
                   <h3>About Dr. Johnson</h3>
@@ -29,13 +31,12 @@ export default function Home() {
                   ullamcorper arcu et bibendum ultrices. Suspendisse rutrum
                   turpis vitae.
                 </p>
-                <a href="about.html">Read More</a>
               </div>
-            </div>
-          </div>
+            </Col>
+          </Row>
 
-          <div className="row">
-            <div className="col-sm-6">
+          <Row>
+            <Col sm={6}>
               <div className="about-col">
                 <h4>Education</h4>
                 <p>
@@ -46,8 +47,8 @@ export default function Home() {
                   Science Center.
                 </p>
               </div>
-            </div>
-            <div className="col-sm-6">
+            </Col>
+            <Col sm={6}>
               <div className="about-col">
                 <h4>Experience</h4>
                 <p>
@@ -58,23 +59,21 @@ export default function Home() {
                   Science Center.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
-
-      <Service />
-
+      <Service/>
       <section id="team">
-        <div className="container">
+        <Container>
           <div className="section-header">
             <h3>Meet Your Fish Veterinarian</h3>
           </div>
 
-          <div className="row">
-            <div className="col-md-4">
+          <Row>
+            <Col md={4}>
               <div className="box8">
-                <img src="img/team-1.jpg" alt="" />
+                <Image src="Images/team-1.jpg" alt="" rounded />
               </div>
               <h4>Maureen L. Reidy</h4>
               <span>Assistant Nurse</span>
@@ -82,11 +81,11 @@ export default function Home() {
                 Lorem ipsum dolor sit amet adipiscing elit. Proin consequat
                 cursus sit amet elit proin consequat.
               </p>
-            </div>
+            </Col>
 
-            <div className="col-md-4">
+            <Col md={4}>
               <div className="box8">
-                <img src="img/team-2.jpg" alt="" />
+                <Image src="Images/team-2.jpg" alt="" rounded />
               </div>
               <h4>Janelle J. Hittle</h4>
               <span>Assistant Nurse</span>
@@ -94,11 +93,11 @@ export default function Home() {
                 Lorem ipsum dolor sit amet adipiscing elit. Proin consequat
                 cursus sit amet elit proin consequat.
               </p>
-            </div>
+            </Col>
 
-            <div className="col-md-4">
+            <Col md={4}>
               <div className="box8">
-                <img src="img/team-3.jpg" alt="" />
+                <Image src="Images/team-3.jpg" alt="" rounded />
               </div>
               <h4>Michael C. Powell</h4>
               <span>Assistant Nurse</span>
@@ -106,9 +105,9 @@ export default function Home() {
                 Lorem ipsum dolor sit amet adipiscing elit. Proin consequat
                 cursus sit amet elit proin consequat.
               </p>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </>
   );
